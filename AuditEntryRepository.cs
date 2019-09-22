@@ -63,7 +63,7 @@ namespace Penguin.Cms.Auditing.Repositories
                     TypeNamespace = message.Target.GetType().Namespace
                 };
 
-                this.Context.Add(newValue);
+                this.Context.Add(thisEntry);
             }
             
         }
