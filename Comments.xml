@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Penguin.Cms.Auditing.Repositories</name>
+    </assembly>
+    <members>
+        <member name="T:Penguin.Cms.Auditing.Repositories.AuditEntryRepository">
+            <summary>
+            A repository with a message handler that accepts persistence context changes so it can log them
+            </summary>
+        </member>
+        <member name="M:Penguin.Cms.Auditing.Repositories.AuditEntryRepository.#ctor(Penguin.Persistence.Abstractions.Interfaces.IPersistenceContext{Penguin.Cms.Auditing.AuditEntry},Penguin.Messaging.Core.MessageBus)">
+            <summary>
+            Constructs a new instance of this repository
+            </summary>
+            <param name="dbContext"></param>
+            <param name="messageBus"></param>
+        </member>
+        <member name="M:Penguin.Cms.Auditing.Repositories.AuditEntryRepository.AcceptMessage(Penguin.Messaging.Persistence.Interfaces.IUpdating{Penguin.Persistence.Abstractions.Models.Base.KeyedObject})">
+            <summary>
+            Accepts an object update message pre-commit so that it can add the change to the underlying context
+            </summary>
+            <param name="message">The object update message</param>
+        </member>
+    </members>
+</doc>
