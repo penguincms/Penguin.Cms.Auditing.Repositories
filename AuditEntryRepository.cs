@@ -1,4 +1,5 @@
-﻿using Penguin.Entities;
+﻿using Penguin.Cms.Entities;
+using Penguin.Entities;
 using Penguin.Messaging.Abstractions.Interfaces;
 using Penguin.Messaging.Core;
 using Penguin.Messaging.Persistence.Interfaces;
@@ -62,6 +63,12 @@ namespace Penguin.Cms.Auditing.Repositories
                     TypeName = message.Target.GetType().Name,
                     TypeNamespace = message.Target.GetType().Namespace
                 };
+
+                //Temporary hack
+                if(message.Target is UserAuditableEntity e)
+                {
+                    thisEntry.Source = e.LastModifier;
+                }
 
                 this.Context.Add(thisEntry);
             }
