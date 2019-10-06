@@ -9,7 +9,7 @@
             A repository with a message handler that accepts persistence context changes so it can log them
             </summary>
         </member>
-        <member name="M:Penguin.Cms.Auditing.Repositories.AuditEntryRepository.#ctor(Penguin.Persistence.Abstractions.Interfaces.IPersistenceContext{Penguin.Cms.Auditing.AuditEntry},Penguin.Messaging.Core.MessageBus)">
+        <member name="M:Penguin.Cms.Auditing.Repositories.AuditEntryRepository.#ctor(Penguin.Persistence.Abstractions.Interfaces.IPersistenceContext{Penguin.Cms.Auditing.AuditEntry},Penguin.Security.Abstractions.Interfaces.IUserSession,Penguin.Messaging.Core.MessageBus)">
             <summary>
             Constructs a new instance of this repository
             </summary>

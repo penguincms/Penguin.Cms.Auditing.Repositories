@@ -7,6 +7,7 @@ using Penguin.Messaging.Persistence.Messages;
 using Penguin.Persistence.Abstractions.Interfaces;
 using Penguin.Persistence.Abstractions.Models.Base;
 using Penguin.Persistence.Repositories;
+using Penguin.Security.Abstractions.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics.Contracts;
@@ -21,13 +22,15 @@ namespace Penguin.Cms.Auditing.Repositories
     {
         private Guid ContextId = Guid.NewGuid();
 
+        IUserSession UserSession { get; set; }
         /// <summary>
         /// Constructs a new instance of this repository
         /// </summary>
         /// <param name="dbContext"></param>
         /// <param name="messageBus"></param>
-        public AuditEntryRepository(IPersistenceContext<AuditEntry> dbContext, MessageBus messageBus = null) : base(dbContext, messageBus)
+        public AuditEntryRepository(IPersistenceContext<AuditEntry> dbContext, IUserSession userSession, MessageBus messageBus = null) : base(dbContext, messageBus)
         {
+            UserSession = userSession;
         }
 
         /// <summary>
@@ -61,7 +64,8 @@ namespace Penguin.Cms.Auditing.Repositories
                     Target = (message.Target as Entity)?.Guid ?? Guid.Empty,
                     Target_Id = message.Target._Id,
                     TypeName = message.Target.GetType().Name,
-                    TypeNamespace = message.Target.GetType().Namespace
+                    TypeNamespace = message.Target.GetType().Namespace,
+                    Source = UserSession?.LoggedInUser?.Guid ?? Guid.Empty
                 };
 
                 //Temporary hack

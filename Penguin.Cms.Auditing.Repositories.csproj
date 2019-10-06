@@ -2,14 +2,15 @@
   <Import Project="Penguin.Projects.Shared\Penguin.Projects.Shared.csproj" />
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-	    <Version>1.0.6</Version>
+	    <Version>1.0.7</Version>
 	<Description>A repository that accepts pre-commit messages for entity changes so that it can create audit entries and add them to the context</Description>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="Penguin.Cms.Auditing" Version="1.0.1" />
     <PackageReference Include="Penguin.Messaging.Persistence" Version="2.2.4" />
-    <PackageReference Include="Penguin.Persistence.Repositories" Version="2.2.4" />
+    <PackageReference Include="Penguin.Persistence.Repositories" Version="2.2.6" />
+    <PackageReference Include="Penguin.Security.Abstractions" Version="1.2.0" />
   </ItemGroup>
 
 </Project>
