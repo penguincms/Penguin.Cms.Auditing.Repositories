@@ -16,7 +16,7 @@
             <param name="dbContext"></param>
             <param name="messageBus"></param>
         </member>
-        <member name="M:Penguin.Cms.Auditing.Repositories.AuditEntryRepository.AcceptMessage(Penguin.Messaging.Persistence.Interfaces.IUpdating{Penguin.Persistence.Abstractions.Models.Base.KeyedObject})">
+        <member name="M:Penguin.Cms.Auditing.Repositories.AuditEntryRepository.AcceptMessage(Penguin.Messaging.Persistence.Interfaces.IUpdating{Penguin.Persistence.Abstractions.KeyedObject})">
             <summary>
             Accepts an object update message pre-commit so that it can add the change to the underlying context
             </summary>

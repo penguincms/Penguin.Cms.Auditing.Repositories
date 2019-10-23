@@ -1,17 +1,16 @@
-﻿using Penguin.Cms.Entities;
-using Penguin.Entities;
+﻿using Penguin.Auditing.Abstractions.Attributes;
+using Penguin.Cms.Entities;
+using Penguin.Cms.Repositories;
 using Penguin.Messaging.Abstractions.Interfaces;
 using Penguin.Messaging.Core;
 using Penguin.Messaging.Persistence.Interfaces;
-using Penguin.Messaging.Persistence.Messages;
+using Penguin.Persistence.Abstractions;
 using Penguin.Persistence.Abstractions.Interfaces;
-using Penguin.Persistence.Abstractions.Models.Base;
-using Penguin.Persistence.Repositories;
 using Penguin.Security.Abstractions.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics.Contracts;
-using System.Text;
+using System.Reflection;
 
 namespace Penguin.Cms.Auditing.Repositories
 {
@@ -20,9 +19,9 @@ namespace Penguin.Cms.Auditing.Repositories
     /// </summary>
     public class AuditEntryRepository : EntityRepository<AuditEntry>, IMessageHandler<IUpdating<KeyedObject>>
     {
+        private IUserSession UserSession { get; set; }
         private Guid ContextId = Guid.NewGuid();
 
-        IUserSession UserSession { get; set; }
         /// <summary>
         /// Constructs a new instance of this repository
         /// </summary>
@@ -41,17 +40,9 @@ namespace Penguin.Cms.Auditing.Repositories
         {
             Contract.Requires(message != null);
 
-            if(message.Target is AuditEntry)
+            if (message.Target.GetType().GetCustomAttribute<DontAuditChangesAttribute>() != null)
             {
                 return;
-            }
-
-            if(message.Target is AuditableEntity a)
-            {
-                if(!a.AuditLogChanges)
-                {
-                    return;
-                }
             }
 
             foreach (KeyValuePair<string, object> newValue in message.NewValues)
@@ -59,7 +50,7 @@ namespace Penguin.Cms.Auditing.Repositories
                 AuditEntry thisEntry = new AuditEntry()
                 {
                     ContextId = ContextId,
-                    NewValue = newValue.Value.ToString(),
+                    NewValue = newValue.Value?.ToString(),
                     PropertyName = newValue.Key,
                     Target = (message.Target as Entity)?.Guid ?? Guid.Empty,
                     Target_Id = message.Target._Id,
@@ -68,15 +59,8 @@ namespace Penguin.Cms.Auditing.Repositories
                     Source = UserSession?.LoggedInUser?.Guid ?? Guid.Empty
                 };
 
-                //Temporary hack
-                if(message.Target is UserAuditableEntity e)
-                {
-                    thisEntry.Source = e.LastModifier;
-                }
-
                 this.Context.Add(thisEntry);
             }
-            
         }
     }
 }
