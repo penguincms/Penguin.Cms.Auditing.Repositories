@@ -2,13 +2,13 @@
   <Import Project="Penguin.Projects.Shared\Penguin.Projects.Shared.csproj" />
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <PackageProjectUrl>https://github.com/penguincms/Penguin.Cms.Images.Repositories</PackageProjectUrl>
+    <PackageProjectUrl>https://github.com/penguincms/Penguin.Cms.Auditing.Repositories</PackageProjectUrl>
     <Version>1.0.0</Version>
     <Description>Not Available</Description>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Penguin.Cms.Repositories" Version="3.0.3-T9LXGUJ" />
-    <PackageReference Include="Penguin.Security.Abstractions" Version="2.0.0-T9LXGUJ" />
-    <PackageReference Include="Penguin.Cms.Auditing" Version="1.0.2-T9LXGUJ" />
+    <PackageReference Include="Penguin.Cms.Repositories" Version="3.0.4-T9M1HHH" />
+    <PackageReference Include="Penguin.Security.Abstractions" Version="2.0.1-T9M1HHH" />
+    <PackageReference Include="Penguin.Cms.Auditing" Version="1.0.3-T9M1HHH" />
   </ItemGroup>
 </Project>
