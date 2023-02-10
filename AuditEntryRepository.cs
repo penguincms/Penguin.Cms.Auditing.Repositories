@@ -48,7 +48,7 @@ namespace Penguin.Cms.Auditing.Repositories
 
             foreach (KeyValuePair<string, object> newValue in message.NewValues)
             {
-                AuditEntry thisEntry = new AuditEntry()
+                AuditEntry thisEntry = new()
                 {
                     ContextId = ContextId,
                     NewValue = newValue.Value?.ToString(),
@@ -60,7 +60,7 @@ namespace Penguin.Cms.Auditing.Repositories
                     Source = UserSession?.LoggedInUser?.Guid ?? Guid.Empty
                 };
 
-                this.Context.Add(thisEntry);
+                Context.Add(thisEntry);
             }
         }
     }
