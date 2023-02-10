@@ -14,6 +14,7 @@
             Constructs a new instance of this repository
             </summary>
             <param name="dbContext"></param>
+            <param name="userSession"></param>
             <param name="messageBus"></param>
         </member>
         <member name="M:Penguin.Cms.Auditing.Repositories.AuditEntryRepository.AcceptMessage(Penguin.Messaging.Persistence.Interfaces.IUpdating{Penguin.Persistence.Abstractions.KeyedObject})">

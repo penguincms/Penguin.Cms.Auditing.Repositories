@@ -26,6 +26,7 @@ namespace Penguin.Cms.Auditing.Repositories
         /// Constructs a new instance of this repository
         /// </summary>
         /// <param name="dbContext"></param>
+        /// <param name="userSession"></param>
         /// <param name="messageBus"></param>
         public AuditEntryRepository(IPersistenceContext<AuditEntry> dbContext, IUserSession userSession, MessageBus messageBus = null) : base(dbContext, messageBus)
         {
